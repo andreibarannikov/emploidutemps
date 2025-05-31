@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Emploi du Temps Interactif</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      margin-bottom: 20px;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 8px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 1em;
+    }
+    button {
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    tbody tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📅 Emploi du Temps Interactif</h1>
+
+  <form id="emploiForm">
+    <label for="jour">Jour :</label>
+    <select id="jour" required>
+      <option value="">--Choisissez un jour--</option>
+      <option>Lundi</option>
+      <option>Mardi</option>
+      <option>Mercredi</option>
+      <option>Jeudi</option>
+      <option>Vendredi</option>
+      <option>Samedi</option>
+      <option>Dimanche</option>
+    </select>
+
+    <label for="heure">Heure (ex: 14:00 - 15:30) :</label>
+    <input type="text" id="heure" placeholder="ex: 14:00 - 15:30" required />
+
+    <label for="activite">Activité :</label>
+    <input type="text" id="activite" placeholder="ex: Cours de guitare" required />
+
+    <label for="description">Description :</label>
+    <textarea id="description" placeholder="ex: Apprentissage des accords" rows="3"></textarea>
+
+    <button type="submit">Ajouter</button>
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Jour</th>
+        <th>Heure</th>
+        <th>Activité</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <!-- Les entrées ajoutées apparaîtront ici -->
+    </tbody>
+  </table>
+
+  <script>
+    const form = document.getElementById('emploiForm');
+    const tableBody = document.getElementById('tableBody');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Récupérer les valeurs
+      const jour = document.getElementById('jour').value.trim();
+      const heure = document.getElementById('heure').value.trim();
+      const activite = document.getElementById('activite').value.trim();
+      const description = document.getElementById('description').value.trim();
+
+      // Vérifier que les champs obligatoires sont remplis
+      if (!jour || !heure || !activite) {
+        alert('Merci de remplir les champs Jour, Heure et Activité.');
+        return;
+      }
+
+      // Créer une nouvelle ligne dans le tableau
+      const newRow = document.createElement('tr');
+
+      newRow.innerHTML = `
+        <td>${jour}</td>
+        <td>${heure}</td>
+        <td>${activite}</td>
+        <td>${description}</td>
+      `;
+
+      tableBody.appendChild(newRow);
+
+      // Réinitialiser le formulaire
+      form.reset();
+    });
+  </script>
+
+</body>
+</html>
+
